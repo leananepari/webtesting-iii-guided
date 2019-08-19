@@ -18,18 +18,20 @@ describe('<App />', () => {
 describe('asyncFunc', () => {
   it('eventually resolves to success', () => {
     // let resolvedValue = null;
-    asyncFunc().then(res => {
+    // asyncFunc().then(res => {
       const expected = 'Success!';
-      let resolvedValue = res;
-      expect(resolvedValue).toEqual(expected);
-    })
+      // let resolvedValue = res;
+      return expect(asyncFunc()).resolves.toBe(expected);
+    // })
   });
 })
 
 describe("speak", () => {
   it('Should pass "bark" into speak', () => {
     const { getByText, queryByText } = render(<App />);
-    
+
+    expect(queryByText(/bark/i)).toBeFalsy();
+
     fireEvent.click(getByText(/speak/i));
 
     expect(queryByText(/bark/i)).toBeTruthy();
